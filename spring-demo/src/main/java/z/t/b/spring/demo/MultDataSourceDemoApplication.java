@@ -5,28 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,
+        DataSourceTransactionManagerAutoConfiguration.class,
+        JdbcTemplateAutoConfiguration.class})
 @Slf4j
-public class SpringDemoApplication implements CommandLineRunner {
-    @Override
-    public void run(String... args) throws Exception {
-
-    }
-
-   /* @Autowired
-    private DataSource dataSource;
+public class MultDataSourceDemoApplication implements CommandLineRunner {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private DataSource fooDataSource;
+
 
     public static void main(String[] args){
-        SpringApplication.run(SpringDemoApplication.class);
+        SpringApplication.run(MultDataSourceDemoApplication.class);
     }
 
     @Override
@@ -36,14 +35,12 @@ public class SpringDemoApplication implements CommandLineRunner {
     }
 
     private void showConnection() throws SQLException {
-        log.info(dataSource.toString());
-        Connection conn = dataSource.getConnection();
+        log.info(fooDataSource.toString());
+        Connection conn = fooDataSource.getConnection();
         log.info(conn.toString());
         conn.close();
     }
 
     private void showData(){
-        jdbcTemplate.queryForList("SELECT * FROM FOO")
-                .forEach(row -> log.info(row.toString()));
-    }*/
+    }
 }
