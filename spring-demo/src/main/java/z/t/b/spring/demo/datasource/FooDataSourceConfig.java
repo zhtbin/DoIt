@@ -22,7 +22,7 @@ public class FooDataSourceConfig {
 
     @Bean
     @Resource
-    public JdbcTemplate barJdbcTemplate(DataSource barDataSource){
+    public JdbcTemplate fooJdbcTemplate(DataSource barDataSource){
         return new JdbcTemplate(barDataSource);
     }
 
@@ -36,7 +36,9 @@ public class FooDataSourceConfig {
     public DataSource fooDataSource(){
         DataSourceProperties properties = fooDataSourceProperties();
         log.info("fooDataSource:{}", properties.getUrl());
-        return properties.initializeDataSourceBuilder().build();
+        DataSource dataSource = properties.initializeDataSourceBuilder().build();
+        log.info("fooDataSource:{}", dataSource);
+        return dataSource;
     }
 
     @Bean

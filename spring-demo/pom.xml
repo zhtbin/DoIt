@@ -26,6 +26,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+<!--            使用druid数据源排除默认的Hikari-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <artifactId>HikariCP</artifactId>-->
+<!--                    <groupId>com.zaxxer</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

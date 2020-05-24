@@ -36,7 +36,9 @@ public class BarDataSourceConfig {
     public DataSource barDataSource(){
         DataSourceProperties properties = barDataSourceProperties();
         log.info("barDataSource:{}", properties.getUrl());
-        return properties.initializeDataSourceBuilder().build();
+        DataSource dataSource = properties.initializeDataSourceBuilder().build();
+        log.info("barDataSource:{}", dataSource);
+        return dataSource;
     }
 
     @Bean
